@@ -20,6 +20,7 @@ env:
 
 build:
   pre_ci:
+    - sdk use gradle 4.10.3
     - cd $TERRAFORM_DIR
     - ./build_and_deploy.sh
     - gradle build
@@ -35,7 +36,8 @@ build:
     pull: true
 
   ci:
-    - if [ "$BRANCH" == "master" ]; then gradle dockerTestRunner; fi
+    - sdk use gradle 4.10.3
+    - if [ "$BRANCH" == "master" ]; then gradle dockerTestRunner && ./build_and_deploy.sh; fi
     - if [ "$BRANCH" == "develop" ] && [ "$IS_PULL_REQUEST" == true ]; then gradle dockerTestRunner; fi
 
 
