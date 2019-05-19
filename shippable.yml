@@ -37,7 +37,6 @@ build:
     - ./build_and_deploy.sh
     - popd
 
-
 # Integrations are used to connect external resources to CI
 # http://docs.shippable.com/integrations/overview/
 integrations:
