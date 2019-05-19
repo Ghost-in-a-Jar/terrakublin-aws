@@ -28,19 +28,19 @@ build:
     - gradle dockerPrepare
     - gradle docker
     - gradle dockerTag latest
-    - gradle dockerPushLatest
 
   pre_ci_boot:
     image_name: $IMAGE_NAME   ##replace with your repo and image name
     image_tag: latest
-    pull: true
+    pull: false
 
   ci:
     - sdk use gradle 4.10.3
-    - if [ "$BRANCH" == "master" ]; then gradle dockerTestRunner && ./build_and_deploy.sh; fi
-    - if [ "$BRANCH" == "develop" ] && [ "$IS_PULL_REQUEST" == true ]; then gradle dockerTestRunner; fi
+    - gradle dockerTestRunner
 
-
+  post_ci:
+    - sdk use gradle 4.10.3
+    - if [ "$BRANCH" == "master" ]; then gradle dockerPushLatest; fi
 
 # Integrations are used to connect external resources to CI
 # http://docs.shippable.com/integrations/overview/
