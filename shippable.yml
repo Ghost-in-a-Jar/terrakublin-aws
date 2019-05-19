@@ -20,7 +20,6 @@ env:
 
 build:
   pre_ci:
-    - sdk use gradle 4.10.3
     - cd $TERRAFORM_DIR
     - ./build_and_deploy.sh
     - gradle build
