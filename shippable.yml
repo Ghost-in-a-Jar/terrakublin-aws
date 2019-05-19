@@ -9,14 +9,27 @@ branches:
     - develop
     - master
 
+infra:
+  pre_prov:
+    - pushd terraform/infra
+    - terraform plan
+    - popd
+
+  prov:
+    - pushd terraform/infra
+    - terraform apply -state=/shippableci/shippable/provision/terraform.tfstate
+    - popd
+
+  post_prov:
+    - pushd terraform/infra
+    - yes yes 2>/dev/null | terraform destroy -state=/shippableci/shippable/provision/terraform.tfstate
+    - popd
+
 build:
   ci:
     - sdk use gradle 5.2.1
     - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
     - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
-    - pushd terraform
-    - ./destroy.sh
-    - popd
     - gradle wrapper --gradle-version 5.2.1
     - ./gradlew assemble
     - ./gradlew dockerClean
@@ -27,9 +40,6 @@ build:
 
   post_ci:
     - ./gradlew dockerPushLatest
-    - pushd terraform
-    - ./build_and_deploy.sh
-    - popd
 
 # Integrations are used to connect external resources to CI
 # http://docs.shippable.com/integrations/overview/
