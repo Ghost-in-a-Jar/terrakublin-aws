@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-cd ..
 printf '\n\nStarting the Terraforming!\n\n'
 cd infra
 
