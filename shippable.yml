@@ -15,7 +15,7 @@ build:
     - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
     - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
     - pushd terraform
-    - ./build_and_deploy.sh
+    - ./destroy.sh
     - popd
     - gradle wrapper --gradle-version 5.2.1
     - ./gradlew assemble
