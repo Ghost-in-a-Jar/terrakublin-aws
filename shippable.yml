@@ -13,6 +13,7 @@ branches:
 build:
   pre_ci:
     - export SDKMAN_DIR=".sdkman"
+    - [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
     - sdk use gradle 5.2.1
     - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
     - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
