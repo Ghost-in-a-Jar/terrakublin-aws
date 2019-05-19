@@ -47,7 +47,7 @@ build:
 # http://docs.shippable.com/integrations/overview/
 integrations:
   hub:
-    - integrationName: shippable-terrakublin
+    - integrationName: shippable_terrakublin
       region: us-east-1
       type: ecr
 
