@@ -14,8 +14,9 @@ build:
   pre_ci:
     - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
     - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
-    - cd $TERRAFORM_DIR
+    - pushd terraform
     - ./build_and_deploy.sh
+    - popd
     - ./gradlew clean build
     - ./gradlew dockerClean
     - ./gradlew dockerPrepare
@@ -32,7 +33,9 @@ build:
 
   post_ci:
     - ./gradlew dockerPushLatest
+    - pushd terraform
     - ./build_and_deploy.sh
+    - popd
 
 
 # Integrations are used to connect external resources to CI
