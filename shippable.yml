@@ -12,6 +12,7 @@ branches:
 build:
   ci:
     - sdk use gradle 5.2.1
+    - jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" terraform/infra/terraform.out
     - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
     - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
     - gradle wrapper --gradle-version 5.2.1
