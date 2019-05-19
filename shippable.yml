@@ -17,11 +17,11 @@ env:
     - SRC_DIR=$SHIPPABLE_REPO_DIR/src
     - TESTS_DIR=$SHIPPABLE_REPO_DIR/test
     - TERRAFORM_DIR=$SHIPPABLE_REPO_DIR/terraform
-    - if [ "$BRANCH" == "master" ]; then ENV=production; fi
-    - if [ "$BRANCH" == "develop" ]; then ENV=develop; fi
 
 build:
   pre_ci:
+    - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
+    - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
     - cd $TERRAFORM_DIR
     - ./build_and_deploy.sh
     - ./gradlew clean build
