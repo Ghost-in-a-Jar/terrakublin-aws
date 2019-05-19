@@ -22,7 +22,6 @@ build:
   pre_ci:
     - cd terraform
     - ./build_and_deploy.sh
-    - jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" terraform.out
     - docker build -t $IMAGE_NAME:latest .
 
   pre_ci_boot:
