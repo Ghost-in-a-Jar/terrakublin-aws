@@ -3,6 +3,8 @@
 printf '\n\nStarting the Terraforming!\n\n'
 cd infra
 
+terraform init
+
 terraform plan -out=plan.out
 
 terraform apply plan.out
