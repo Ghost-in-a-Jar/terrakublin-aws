@@ -20,9 +20,9 @@ env:
 
 build:
   pre_ci:
-    - cd terraform
+    - cd $TERRAFORM_DIR
     - ./build_and_deploy.sh
-    - docker build -t $IMAGE_NAME:latest .
+    - gradlew build
 
   pre_ci_boot:
     image_name: $IMAGE_NAME   ##replace with your repo and image name
@@ -30,8 +30,8 @@ build:
     pull: true
 
   ci:
-    - if [ "$BRANCH" == "master" ]; then echo "$ENV"; fi
-    - if [ "$BRANCH" == "develop" ] && [ "$IS_PULL_REQUEST" == true ]; then echo "$ENV"; fi
+    - if [ "$BRANCH" == "master" ]; then gradlew test; fi
+    - if [ "$BRANCH" == "develop" ] && [ "$IS_PULL_REQUEST" == true ]; then gradlew test; fi
 
 
 
