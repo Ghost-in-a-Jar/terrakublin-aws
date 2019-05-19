@@ -45,6 +45,10 @@ build:
 # Integrations are used to connect external resources to CI
 # http://docs.shippable.com/integrations/overview/
 integrations:
+  hub:
+    - integrationName: terrakublin-shippable
+      region: us-east-1
+      type: ecr
 
   # http://docs.shippable.com/ci/shippableyml/#notifications
   notifications:
