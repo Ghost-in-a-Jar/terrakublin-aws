@@ -9,22 +9,6 @@ branches:
     - develop
     - master
 
-infra:
-  pre_prov:
-    - pushd terraform/infra
-    - terraform plan
-    - popd
-
-  prov:
-    - pushd terraform/infra
-    - terraform apply -state=/shippableci/shippable/provision/terraform.tfstate
-    - popd
-
-  post_prov:
-    - pushd terraform/infra
-    - yes yes 2>/dev/null | terraform destroy -state=/shippableci/shippable/provision/terraform.tfstate
-    - popd
-
 build:
   ci:
     - sdk use gradle 5.2.1
