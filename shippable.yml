@@ -10,14 +10,6 @@ branches:
     - develop
     - master
 
-# using pre-defined build variables
-# full list http://docs.shippable.com/ci/advancedOptions/environmentVariables/
-env:
-  global:
-    - SRC_DIR=$SHIPPABLE_REPO_DIR/src
-    - TESTS_DIR=$SHIPPABLE_REPO_DIR/test
-    - TERRAFORM_DIR=$SHIPPABLE_REPO_DIR/terraform
-
 build:
   pre_ci:
     - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
@@ -50,13 +42,3 @@ integrations:
     - integrationName: shippable_terrakublin
       region: us-east-1
       type: ecr
-
-  # http://docs.shippable.com/ci/shippableyml/#notifications
-  notifications:
-    # turning of email for PR builds, get notified only on failure and change in status
-    # http://docs.shippable.com/integrations/notifications/email/
-    - integrationName: email
-      type: email
-      on_success: change
-      on_failure: always
-on_pull_request: never
