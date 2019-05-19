@@ -102,7 +102,6 @@ module "alb" {
   ]
 
   access_logs_region = "us-east-1"
-  https_enabled      = "true"
 }
 
 //module "production_www" {
