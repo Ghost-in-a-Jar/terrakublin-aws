@@ -7,16 +7,32 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
+plugins {
+    id 'com.palantir.docker' version '0.22.1'
+    id 'com.palantir.docker-run' version '0.22.1'
+
+}
 
 apply plugin: 'kotlin'
 apply plugin: 'application'
 
-mainClassName = "io.ktor.server.netty.DevelopmentEngine"
+mainClassName = "com.terrakublin.Application.main"
 
 sourceSets {
     main.kotlin.srcDirs = [ 'src' ]
     test.kotlin.srcDirs = [ 'test' ]
     main.resources.srcDirs = [ 'resources' ]
+}
+
+docker {
+    name ''
+}
+
+dockerRun {
+    name 'terrakublin-container'
+    image 'terrakublin'
+    ports '80:8080'
+    command "java", "-server", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-XX:InitialRAMFraction=2", "-XX:MinRAMFraction=2", "-XX:MaxRAMFraction=2", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=100", "-XX:+UseStringDeduplication", "-jar", "terrakublin.jar"
 }
 
 repositories {

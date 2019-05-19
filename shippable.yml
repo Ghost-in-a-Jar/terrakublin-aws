@@ -1,0 +1,51 @@
+language: java
+
+jdk:
+  - oraclejdk8
+
+# use this to control what branches get built.
+# http://docs.shippable.com/ci/advancedOptions/branches/
+branches:
+  only:
+    - develop
+    - master
+
+# using pre-defined build variables
+# full list http://docs.shippable.com/ci/advancedOptions/environmentVariables/
+env:
+  global:
+    - SRC_DIR=$SHIPPABLE_REPO_DIR/src
+    - TESTS_DIR=$SHIPPABLE_REPO_DIR/test
+    - TERRAFORM_DIR=$SHIPPABLE_REPO_DIR/terraform
+
+build:
+  pre_ci:
+    - cd terraform
+    - ./build_and_deploy.sh
+    - jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" terraform.out
+    - docker build -t $IMAGE_NAME:latest .
+
+  pre_ci_boot:
+    image_name: $IMAGE_NAME   ##replace with your repo and image name
+    image_tag: latest
+    pull: true
+
+  ci:
+    - if [ "$BRANCH" == "master" ]; then echo "$ENV"; fi
+    - if [ "$BRANCH" == "develop" ] && [ "$IS_PULL_REQUEST" == true ]; then echo "$ENV"; fi
+
+
+
+# Integrations are used to connect external resources to CI
+# http://docs.shippable.com/integrations/overview/
+integrations:
+
+  # http://docs.shippable.com/ci/shippableyml/#notifications
+  notifications:
+    # turning of email for PR builds, get notified only on failure and change in status
+    # http://docs.shippable.com/integrations/notifications/email/
+    - integrationName: email
+      type: email
+      on_success: change
+      on_failure: always
+on_pull_request: never

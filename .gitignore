@@ -21,3 +21,5 @@
 /out
 /build
 *.iml
+.terraform/
+*/.terraform/

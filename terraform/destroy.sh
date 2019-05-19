@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-cd terraform
-terraform destroy -force
+cd terraform/infra
+terraform destroy
 rm plan.out
