@@ -35,11 +35,9 @@ build:
     pull: false
 
   ci:
-    - sdk use gradle 4.10.3
     - gradle dockerTestRunner
 
   post_ci:
-    - sdk use gradle 4.10.3
     - if [ "$BRANCH" == "master" ]; then gradle dockerPushLatest; fi
 
 
