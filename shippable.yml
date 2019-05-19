@@ -1,7 +1,7 @@
 language: java
 
 jdk:
-  - openjdk11
+  - openjdk7
 
 # use this to control what branches get built.
 # http://docs.shippable.com/ci/advancedOptions/branches/
