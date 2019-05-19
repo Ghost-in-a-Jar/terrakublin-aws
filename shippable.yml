@@ -22,11 +22,11 @@ build:
   pre_ci:
     - cd $TERRAFORM_DIR
     - ./build_and_deploy.sh
-    - gradle build
-    - gradle dockerClean
-    - gradle dockerPrepare
-    - gradle docker
-    - gradle dockerTag latest
+    - ./gradlew build
+    - ./gradlew dockerClean
+    - ./gradlew dockerPrepare
+    - ./gradlew docker
+    - ./gradlew dockerTag latest
 
   pre_ci_boot:
     image_name: $IMAGE_NAME   ##replace with your repo and image name
@@ -34,10 +34,10 @@ build:
     pull: false
 
   ci:
-    - gradle dockerTestRunner
+    - ./gradlew dockerTestRunner
 
   post_ci:
-    - gradle dockerPushLatest
+    - ./gradlew dockerPushLatest
     - ./build_and_deploy.sh
 
 
