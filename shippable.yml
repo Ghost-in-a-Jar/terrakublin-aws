@@ -42,6 +42,7 @@ build:
     - sdk use gradle 4.10.3
     - if [ "$BRANCH" == "master" ]; then gradle dockerPushLatest; fi
 
+
 # Integrations are used to connect external resources to CI
 # http://docs.shippable.com/integrations/overview/
 integrations:
