@@ -21,6 +21,6 @@
 /out
 /build
 *.iml
-.terraform/
+.terraform/*
 */.terraform/
 *.tfstate
