@@ -10,7 +10,7 @@ branches:
     - master
 
 build:
-  pre_ci:
+  ci:
     - sdk use gradle 5.2.1
     - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
     - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
@@ -23,13 +23,6 @@ build:
     - ./gradlew dockerPrepare
     - ./gradlew docker
     - ./gradlew dockerTag latest
-
-  pre_ci_boot:
-    image_name: $IMAGE_NAME   ##replace with your repo and image name
-    image_tag: latest
-    pull: false
-
-  ci:
     - ./gradlew dockerTestRunner
 
   post_ci:
