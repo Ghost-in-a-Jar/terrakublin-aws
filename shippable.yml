@@ -18,11 +18,11 @@ build:
     - pushd terraform
     - ./build_and_deploy.sh
     - popd
-    - ./gradlew clean build
-    - ./gradlew dockerClean
-    - ./gradlew dockerPrepare
-    - ./gradlew docker
-    - ./gradlew dockerTag latest
+    - gradle assemble
+    - gradle dockerClean
+    - gradle dockerPrepare
+    - gradle docker
+    - gradle dockerTag latest
 
   pre_ci_boot:
     image_name: $IMAGE_NAME   ##replace with your repo and image name
