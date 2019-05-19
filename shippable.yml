@@ -1,7 +1,6 @@
 language: java
 
-jdk:
-  - openjdk7
+jdk: openjdk8
 
 # use this to control what branches get built.
 # http://docs.shippable.com/ci/advancedOptions/branches/
@@ -12,8 +11,6 @@ branches:
 
 build:
   pre_ci:
-    - export SDKMAN_DIR="$HOME/.sdkman"
-    - source "$HOME/.sdkman/bin/sdkman-init.sh"
     - sdk use gradle 5.2.1
     - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
     - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
