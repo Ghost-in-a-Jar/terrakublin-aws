@@ -1,4 +1,6 @@
-package com.terrakublin.Applocation
+package com.terrakublin
+
+-aws.Applocation
 
 import io.ktor.application.Application
 import io.ktor.application.ApplicationCall
@@ -45,10 +47,10 @@ fun Application.main() {
     // Supports for Range, Accept-Range and Content-Range headers
     install(PartialContent)
 
-    // Obtains the terrakublin config key from the application.conf file.
+    // Obtains the terrakublin-aws config key from the application.conf file.
     // Inside that key, we then read several configuration properties
     // with the [session.cookie], the [key] or the [upload.dir]
-    val config = environment.config.config("terrakublin")
+    val config = environment.config.config("terrakublin-aws")
 
     // We create the folder and a [Database] in that folder for the configuration [upload.dir].
     val uploadDirPath: String = config.property("upload.dir").getString()

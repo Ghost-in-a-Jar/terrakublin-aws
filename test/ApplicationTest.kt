@@ -1,4 +1,6 @@
-import com.terrakublin.Applocation.main
+import com.terrakublin
+
+-aws.Applocation.main
 import io.ktor.config.MapApplicationConfig
 import io.ktor.http.HttpMethod
 import io.ktor.server.testing.TestApplicationEngine
@@ -30,7 +32,7 @@ class ApplicationTest {
         try {
             withTestApplication({
                 (environment.config as MapApplicationConfig).apply {
-                    put("terrakublin.upload.dir", tempPath.absolutePath)
+                    put("terrakublin-aws.upload.dir", tempPath.absolutePath)
                 }
                 main()
             }, callback)

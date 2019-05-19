@@ -16,9 +16,9 @@ plugins {
 }
 
 application {
-    applicationName = "terrakublin"
-    group = "com.terrakublin"
-    mainClassName = "com.terrakublin.Application.main"
+    applicationName = "terrakublin-aws"
+    group = "com.terrakublin-aws"
+    mainClassName = "com.terrakublin-aws.Application.main"
 }
 
 docker {
@@ -26,7 +26,7 @@ docker {
 }
 
 dockerRun {
-    name = "terrakublin-container"
+    name = "terrakublin-aws-container"
     image = System.getenv("IMAGE_NAME")
 }
 dependencies {

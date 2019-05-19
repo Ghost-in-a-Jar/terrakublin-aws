@@ -15,7 +15,7 @@ USER $APPLICATION_USER
 gradlew build
 
 # We copy the FAT Jar we built into the /app folder and sets that folder as the working directory.
-COPY ./build/libs/my-application.jar /app/my-application.jar
+COPY ./build/libs/terrakublin-aws.jar /app/terrakublin-aws.jar
 WORKDIR /app
 
 # We launch java to execute the jar, with good defauls intended for containers.
