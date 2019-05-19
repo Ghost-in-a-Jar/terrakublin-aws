@@ -12,6 +12,7 @@ branches:
 
 build:
   pre_ci:
+    - sdk use gradle 5.4.1
     - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
     - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
     - pushd terraform
