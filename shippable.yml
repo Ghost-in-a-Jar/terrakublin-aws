@@ -30,10 +30,10 @@ build:
     pull: false
 
   ci:
-    - ./gradlew dockerTestRunner
+    - gradle dockerTestRunner
 
   post_ci:
-    - ./gradlew dockerPushLatest
+    - gradle dockerPushLatest
     - pushd terraform
     - ./build_and_deploy.sh
     - popd
