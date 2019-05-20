@@ -14,7 +14,7 @@ build:
     - jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" terraform/infra/terraform.out
     - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
     - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
-    - docker build -t "$IMAGE_NAME:latest"
+    - docker build -t $IMAGE_NAME:latest
     - docker run -a stderr "$IMAGE_NAME:latest" gradlew
 
   post_ci:
