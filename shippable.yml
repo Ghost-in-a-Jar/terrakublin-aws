@@ -15,7 +15,7 @@ build:
     - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
     - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
     - docker assemble -t "$IMAGE_NAME:latest"
-    - docker run -a stderr $IMAGE_NAME:latest gradlew
+    - docker run -a stderr "$IMAGE_NAME:latest" gradlew
 
   post_ci:
     on_success:
