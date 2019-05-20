@@ -1,5 +1,7 @@
 package com.terrakublin
 
+-aws
+
 -aws.Applocation
 
 import io.ktor.application.Application

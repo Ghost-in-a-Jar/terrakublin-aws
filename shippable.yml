@@ -11,6 +11,9 @@ branches:
 
 build:
   ci:
+    - sdk use gradle 5.2.1
+    - gradle build
+    - gradle test
     - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
     - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
     - NAME=012411446813.dkr.ecr.us-east-1.amazonaws.com/terrakublin_ecr
