@@ -12,7 +12,14 @@ RUN chown -R $APPLICATION_USER /app
 # Marks this container to use the specified $APPLICATION_USER
 USER $APPLICATION_USER
 
-gradlew assemble
+FROM gradle:jdk10 as builder
+
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
+RUN gradle build
+
+FROM openjdk:10-jre-slim
+EXPOSE 8080
 
 # We copy the FAT Jar we built into the /app folder and sets that folder as the working directory.
 COPY ./build/libs/terrakublin-aws.jar /app/terrakublin-aws.jar
