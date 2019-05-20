@@ -12,7 +12,7 @@ RUN chown -R $APPLICATION_USER /app
 # Marks this container to use the specified $APPLICATION_USER
 USER $APPLICATION_USER
 
-FROM gradle:jdk10 as builder
+FROM gradle:jdk8 as builder
 
 RUN gradle build
 RUN gradle test
