@@ -14,11 +14,11 @@ build:
     - jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" terraform/infra/terraform.out
     - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
     - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
-    - docker build -t $IMAGE_NAME:latest
-    - docker run -a stderr "$IMAGE_NAME:latest" gradlew
+    - docker build .
+    - docker run -a stderr . gradlew
 
   post_ci:
-    - docker push
+    - docker push $IMAGE_NAME:latest
 
 # Integrations are used to connect external resources to CI
 # http://docs.shippable.com/integrations/overview/
