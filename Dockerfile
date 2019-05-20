@@ -1,6 +1,7 @@
 FROM gradle:jdk8 as builder
 
-RUN gradle build
+RUN gradlew build
+RUN gradlew test
 
 EXPOSE 8080
 
