@@ -15,13 +15,13 @@ import kotlin.test.assertTrue
  */
 class ApplicationTest {
     /**
-     * Verifies that the [Index] page, returns content with "You need to upload some videos to watch them"
+     * Verifies that the [Index] page, returns content with ""
      * for an empty test application.
      */
     @Test
     fun testRootWithoutVideos() = testApp {
         handleRequest(HttpMethod.Get, "/").apply {
-            assertTrue { response.content!!.contains("You need to upload some videos to watch them") }
+            assertTrue { response.content!!.contains("") }
         }
     }
     /**
@@ -30,10 +30,6 @@ class ApplicationTest {
     private fun testApp(callback: TestApplicationEngine.() -> Unit): Unit {
         val tempPath = Files.createTempDirectory(null).toFile().apply { deleteOnExit() }
         try {
-            withTestApplication({
-                (environment.config as MapApplicationConfig).apply {
-                    put("terrakublin-aws.upload.dir", tempPath.absolutePath)
-                }
                 main()
             }, callback)
         } finally {

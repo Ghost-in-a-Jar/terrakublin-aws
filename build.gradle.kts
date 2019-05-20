@@ -1,4 +1,3 @@
-val kotlinVersion = "1.3.50"
 val ktorVersion = "1.1.5"
 
 repositories {
