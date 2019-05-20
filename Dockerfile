@@ -14,7 +14,8 @@ USER $APPLICATION_USER
 
 FROM gradle:jdk10 as builder
 
-RUN gradle build test
+RUN gradle build
+RUN gradle test
 
 EXPOSE 8080
 
