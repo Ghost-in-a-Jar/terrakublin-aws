@@ -1,8 +1,5 @@
 FROM gradle:jdk8 as builder
 
-COPY . /app
-WORKDIR /app
-
 RUN gradle build
 
 EXPOSE 8080
