@@ -2,8 +2,6 @@ package com.terrakublin
 
 -aws
 
--aws.Applocation
-
 import io.ktor.application.Application
 import io.ktor.application.ApplicationCall
 import io.ktor.application.install

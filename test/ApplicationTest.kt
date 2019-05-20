@@ -1,6 +1,7 @@
 import com.terrakublin
 
--aws.Applocation.main
+-aws
+
 import io.ktor.config.MapApplicationConfig
 import io.ktor.http.HttpMethod
 import io.ktor.server.testing.TestApplicationEngine
