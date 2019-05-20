@@ -1,4 +1,4 @@
-import com.terrakublin-aws
+import com.terrakublin.aws
 
 import io.ktor.config.MapApplicationConfig
 import io.ktor.http.HttpMethod
