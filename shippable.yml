@@ -21,7 +21,7 @@ build:
     - docker tag $IMG$LATEST
 
   post_ci:
-    -docker push $NAME
+    - docker push $NAME
     - docker tag $LATEST $NAME
 
 # Integrations are used to connect external resources to CI
