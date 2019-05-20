@@ -1,6 +1,4 @@
-package com.terrakublin
-
--aws
+package com.terrakublin-aws
 
 import io.ktor.application.Application
 import io.ktor.application.ApplicationCall
