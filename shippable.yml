@@ -18,8 +18,7 @@ build:
     - IMG=$NAME:$TAG
     - echo $IMG
     - LATEST=$NAME:latest
-    - docker build -t $TAG
-
+    - docker build -t $LATEST -t $IMG .
   post_ci:
     - docker push
     - docker tag $LATEST $NAME
