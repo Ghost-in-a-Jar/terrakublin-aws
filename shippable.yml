@@ -11,20 +11,15 @@ branches:
 
 build:
   ci:
-    - sdk use gradle 5.2.1
     - jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" terraform/infra/terraform.out
     - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
     - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
-    - gradle wrapper --gradle-version 5.2.1
-    - ./gradlew assemble
-    - ./gradlew dockerClean
-    - ./gradlew dockerPrepare
-    - ./gradlew docker
-    - ./gradlew dockerTag latest
-    - ./gradlew dockerTestRunner
+    - docker assemble -t "$IMAGE_NAME:latest"
+    - docker run -a stderr $IMAGE_NAME:latest gradlew
 
   post_ci:
-    - ./gradlew dockerPushLatest
+    on_success:
+      - docker push
 
 # Integrations are used to connect external resources to CI
 # http://docs.shippable.com/integrations/overview/

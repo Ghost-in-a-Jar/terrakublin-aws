@@ -11,8 +11,6 @@ repositories {
 plugins {
     application
     kotlin("jvm") version "1.3.10"
-    id("com.palantir.docker") version "0.22.1"
-    id("com.palantir.docker-run") version "0.22.1"
 }
 
 application {
@@ -21,14 +19,6 @@ application {
     mainClassName = "com.terrakublin-aws.Application.main"
 }
 
-docker {
-    name = System.getenv("IMAGE_NAME")
-}
-
-dockerRun {
-    name = "terrakublin-aws-container"
-    image = System.getenv("IMAGE_NAME")
-}
 dependencies {
 
     fun ktor(s: String = "", v: String = ktorVersion) = "io.ktor:ktor$s:$v"
