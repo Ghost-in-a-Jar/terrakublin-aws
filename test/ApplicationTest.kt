@@ -1,5 +1,7 @@
 import com.terrakublin
 
+-aws
+
 -aws.Applocation.main
 import io.ktor.config.MapApplicationConfig
 import io.ktor.http.HttpMethod
