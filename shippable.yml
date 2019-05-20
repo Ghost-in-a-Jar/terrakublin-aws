@@ -1,0 +1,34 @@
+language: java
+
+jdk: openjdk8
+
+# use this to control what branches get built.
+# http://docs.shippable.com/ci/advancedOptions/branches/
+branches:
+  only:
+    - develop
+    - master
+
+build:
+  ci:
+    - sdk use gradle 5.2.1
+    - gradle build
+    - gradle test
+    - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
+    - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
+    - NAME=012411446813.dkr.ecr.us-east-1.amazonaws.com/terrakublin_ecr
+    - IMG=$NAME:$COMMIT
+    - echo $IMG
+    - LATEST=$NAME:latest
+    - docker build -t $IMG .
+  post_ci:
+    - docker push $IMG
+    - docker tag $LATEST $NAME
+
+# Integrations are used to connect external resources to CI
+# http://docs.shippable.com/integrations/overview/
+integrations:
+  hub:
+    - integrationName: shippable_terrakublin_aws
+      region: us-east-1
+      type: ecr
