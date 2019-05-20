@@ -16,9 +16,9 @@ build:
     - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
     - TAG=`git tag -l --points-at HEAD`
     - IMG=$NAME:$TAG
+    - echo $IMG
     - LATEST=$NAME:latest
     - docker build -t $IMG .
-    - docker tag $IMG$LATEST
 
   post_ci:
     - docker push $NAME
