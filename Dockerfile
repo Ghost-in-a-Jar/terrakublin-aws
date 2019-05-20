@@ -14,14 +14,12 @@ USER $APPLICATION_USER
 
 FROM gradle:jdk10 as builder
 
-COPY --chown=gradle:gradle . /home/gradle/src
-WORKDIR /home/gradle/src
 RUN gradle build test
 
 EXPOSE 8080
 
 # We copy the FAT Jar we built into the /app folder and sets that folder as the working directory.
-COPY ./build/libs/terrakublin-aws.jar /app/terrakublin-aws.jar
+COPY build/libs/terrakublin-aws.jar /app/terrakublin-aws.jar
 WORKDIR /app
 
 # We launch java to execute the jar, with good defauls intended for containers.
