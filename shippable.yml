@@ -14,7 +14,7 @@ build:
     - jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" terraform/infra/terraform.out
     - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
     - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
-    - TAG=$$(git tag -l --points-at HEAD)
+    - TAG=`git tag -l --points-at HEAD`
     - IMG=$NAME:$TAG
     - LATEST=$NAME:latest
     - docker build -t $IMG .
