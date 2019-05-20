@@ -17,9 +17,9 @@ build:
     - IMG=$NAME:$COMMIT
     - echo $IMG
     - LATEST=$NAME:latest
-    - docker build -t $LATEST -t $IMG .
+    - docker build -t $IMG .
   post_ci:
-    - docker push
+    - docker push $IMG
     - docker tag $LATEST $NAME
 
 # Integrations are used to connect external resources to CI
