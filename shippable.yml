@@ -13,9 +13,8 @@ build:
   ci:
     - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
     - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
-    - TAG=`git tag -l --points-at HEAD`
     - NAME=012411446813.dkr.ecr.us-east-1.amazonaws.com/terrakublin_ecr
-    - IMG=$NAME:$TAG
+    - IMG=$NAME:$COMMIT
     - echo $IMG
     - LATEST=$NAME:latest
     - docker build -t $LATEST -t $IMG .
