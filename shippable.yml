@@ -11,10 +11,10 @@ branches:
 
 build:
   ci:
-    - jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" terraform/infra/terraform.out
     - if [ "$BRANCH" == "master" ]; then export ENV=production; fi
     - if [ "$BRANCH" == "develop" ]; then export ENV=develop; fi
     - TAG=`git tag -l --points-at HEAD`
+    - NAME=$012411446813.dkr.ecr.eu-west-1.amazonaws.com/terrakublin_ecr
     - IMG=$NAME:$TAG
     - echo $IMG
     - LATEST=$NAME:latest
