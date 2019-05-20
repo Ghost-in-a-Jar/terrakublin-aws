@@ -22,7 +22,7 @@ dependencies {
 
     fun ktor(s: String = "", v: String = ktorVersion) = "io.ktor:ktor$s:$v"
     compile(ktor())
-    compile(ktor("-gson"))
+    compile(ktor("-gson", "1.2.0"))
     compile(ktor("-html-builder"))
     compile(ktor("-server-netty"))
     compile("ch.qos.logback:logback-classic:1.2.1")
