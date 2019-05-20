@@ -17,8 +17,8 @@ build:
     - docker build -t $IMAGE_NAME:$BRANCH .
 
   post_ci:
-    - docker push $IMAGE_NAME:$BRANCH
-    - docker tag $IMAGE_NAME:latest $IMAGE_NAME:$BRANCH
+    - docker push "$IMAGE_NAME:$BRANCH"
+    - docker tag "$IMAGE_NAME:latest" "$IMAGE_NAME:$BRANCH"
 
 # Integrations are used to connect external resources to CI
 # http://docs.shippable.com/integrations/overview/
