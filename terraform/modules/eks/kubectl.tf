@@ -31,7 +31,7 @@ resource "null_resource" "apply_config_map_aws_auth" {
   count = "${var.enabled == "true" && var.apply_config_map_aws_auth == "true" ? 1 : 0}"
 
   provisioner "local-exec" {
-    command = "aws eks update-kubeconfig --name ${local.eks_cluster_name} --kubeconfig ${local.kubeconfig_filename}"
+    command = "aws eks update-kubeconfig --name ${module.eks_cluster.eks_cluster_id} --kubeconfig ${local.kubeconfig_filename}"
   }
 
 
@@ -56,11 +56,11 @@ resource "null_resource" "apply_config_map_aws_auth" {
   }
 
   provisioner "local-exec" {
-    command = "kubectl apply -f eks-admin-service-account.yaml --kubeconfig ${local.kubeconfig_filename}"
+    command = "kubectl apply -f https://raw.githubusercontent.com/uruddarraju/kubernetes-rbac-policies/master/rolebindings/kube-system-admin-rb.yaml --kubeconfig ${local.kubeconfig_filename}"
   }
 
   provisioner "local-exec" {
-    command = "kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-admin | awk '{print $1}') --kubeconfig ${local.kubeconfig_filename}"
+    command = "kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep kube-system-admin | awk '{print $1}') --kubeconfig ${local.kubeconfig_filename}"
   }
 
   provisioner "local-exec" {
