@@ -31,6 +31,11 @@ resource "null_resource" "apply_config_map_aws_auth" {
   count = "${var.enabled == "true" && var.apply_config_map_aws_auth == "true" ? 1 : 0}"
 
   provisioner "local-exec" {
+    command = "aws eks update-kubeconfig --name ${local.eks_cluster_name} --kubeconfig ${local.kubeconfig_filename}"
+  }
+
+
+  provisioner "local-exec" {
     command = "kubectl apply -f ${local.config_map_aws_auth_filename} --kubeconfig ${local.kubeconfig_filename}"
   }
 
