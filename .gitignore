@@ -32,3 +32,5 @@
 # Crash log files
 crash.log
 /terraform/infra/.terraform/modules/*
+/terraform/modules/eks/kubeconfig-terrakublin-staging-terrakublin-staging-ekscluster-cluster.yaml
+/terraform/modules/eks/config-map-aws-auth-terrakublin-staging-terrakublin-staging-ekscluster-cluster.yaml

@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 printf '\n\nStarting the Terraforming!\n\n'
-pushd infra
-ENV="develop"
+pushd terraform/envs/$ENV
 terraform init
 terraform plan -out=plan.out
 terraform apply plan.out
