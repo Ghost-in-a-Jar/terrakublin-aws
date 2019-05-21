@@ -35,31 +35,31 @@ resource "null_resource" "apply_config_map_aws_auth" {
   }
 
   provisioner "local-exec" {
-    command = "kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml"
+    command = "kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml --kubeconfig ${local.kubeconfig_filename}"
   }
 
   provisioner "local-exec" {
-    command = "kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/heapster.yaml"
+    command = "kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/heapster.yaml --kubeconfig ${local.kubeconfig_filename}"
   }
 
   provisioner "local-exec" {
-    command = "kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/influxdb.yaml"
+    command = "kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/influxdb.yaml --kubeconfig ${local.kubeconfig_filename}"
   }
 
   provisioner "local-exec" {
-    command = "kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/rbac/heapster-rbac.yaml"
+    command = "kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/rbac/heapster-rbac.yaml --kubeconfig ${local.kubeconfig_filename}"
   }
 
   provisioner "local-exec" {
-    command = "kubectl apply -f eks-admin-service-account.yaml"
+    command = "kubectl apply -f eks-admin-service-account.yaml --kubeconfig ${local.kubeconfig_filename}"
   }
 
   provisioner "local-exec" {
-    command = "kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-admin | awk '{print $1}')"
+    command = "kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-admin | awk '{print $1}') --kubeconfig ${local.kubeconfig_filename}"
   }
 
   provisioner "local-exec" {
-    command = "kubectl proxy"
+    command = "kubectl proxy --kubeconfig ${local.kubeconfig_filename}"
   }
 
   triggers {
