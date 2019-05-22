@@ -4,6 +4,11 @@
 # Log file
 *.log
 
+# secrets
+*.crt
+*.key
+*.p12
+
 # Package Files #
 *.jar
 *.war

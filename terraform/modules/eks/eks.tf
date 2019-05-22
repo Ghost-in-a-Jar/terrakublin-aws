@@ -17,7 +17,7 @@ module "vpc" {
   namespace  = "${var.namespace}"
   stage      = "${var.env}"
   name       = "vpc"
-  tags       = "${local.tags}"
+  tags       = "${var.tags}"
   cidr_block = "10.0.0.0/16"
 }
 
@@ -27,7 +27,7 @@ module "subnets" {
   name                = "subnets"
   namespace           = "${var.namespace}"
   stage               = "${var.env}"
-  tags                = "${local.tags}"
+  tags                = "${var.tags}"
   vpc_id              = "${module.vpc.vpc_id}"
   igw_id              = "${module.vpc.igw_id}"
   cidr_block          = "${module.vpc.vpc_cidr_block}"
@@ -40,7 +40,7 @@ module "eks_cluster" {
   name       = "${local.eks_cluster_name}"
   namespace  = "${var.namespace}"
   stage      = "${var.env}"
-  tags       = "${var.tags}"
+  tags       = "${local.tags}"
   vpc_id     = "${module.vpc.vpc_id}"
   subnet_ids = ["${module.subnets.public_subnet_ids}"]
 
@@ -54,7 +54,7 @@ module "eks_workers" {
   name                               = "workers"
   namespace                          = "${var.namespace}"
   stage                              = "${var.env}"
-  tags                               = "${var.tags}"
+  tags       = "${local.tags}"
   vpc_id                             = "${module.vpc.vpc_id}"
   subnet_ids                         = ["${module.subnets.public_subnet_ids}"]
   health_check_type                  = "EC2"
@@ -62,7 +62,6 @@ module "eks_workers" {
   min_size                           = 1
   max_size                           = 3
   wait_for_capacity_timeout          = "10m"
-  associate_public_ip_address        = true
   cluster_name                       = "${local.eks_cluster_name}"
   cluster_endpoint                   = "${module.eks_cluster.eks_cluster_endpoint}"
   cluster_certificate_authority_data = "${module.eks_cluster.eks_cluster_certificate_authority_data}"
@@ -73,3 +72,4 @@ module "eks_workers" {
   cpu_utilization_high_threshold_percent = "80"
   cpu_utilization_low_threshold_percent  = "20"
 }
+
